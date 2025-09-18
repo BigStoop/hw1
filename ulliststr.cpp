@@ -35,8 +35,8 @@ void ULListStr::push_back(const std::string& val)
       head_ = new_Item;
     }
     else {
-      tail_->next = new_Item
-      new_Item->prev = tail_
+      tail_->next = new_Item;
+      new_Item->prev = tail_;
       
     }
     tail_ = new_Item;
@@ -57,14 +57,14 @@ void ULListStr::push_front(const std::string& val)
       tail_ = new_Item;
     }
     else {
-      head_->prev = new_Item
-      new_Item->next = head_
+      head_->prev = new_Item;
+      new_Item->next = head_;
     }
     head_ = new_Item;
 
   }
   
-  --head->first;
+  --head_->first;
   head_->val[head_->first] = val;
   ++size_;
 }
@@ -72,18 +72,18 @@ void ULListStr::push_front(const std::string& val)
 void pop_back()
 {
   if(empty()) {
-    throw std::runtime_error("list is empty")
+    throw std::runtime_error("list is empty");
   }
 
   --tail_->last;
   --size_;
-  if(tail_->last == tail->first) {
+  if(tail_->last == tail_->first) {
     if(tail_ == head_) {
       head_ = NULL;
       tail_ = NULL;
     }
     else {
-      tail_ = tail->prev;
+      tail_ = tail_->prev;
       tail_->next = NULL;
     }
   }
@@ -92,21 +92,67 @@ void pop_back()
 void pop_front()
 {
   if(empty()) {
-    throw std::runtime_error("list is empty")
+    throw std::runtime_error("list is empty");
   }
 
-  --head->front;
+  --head_->front;
   --size_;
-  if(tail_->last == tail->first) {
+  if(head_->last == head_->first) {
     if(tail_ == head_) {
       head_ = NULL;
       tail_ = NULL;
     }
     else {
-      tail_ = tail->prev;
-      tail_->next = NULL;
+      head_ = head_->next;
+      head_->prev = NULL;
     }
   }
+}
+
+std::string const & back() const 
+{
+  if(empty()) {
+    throw std::runtime_error("list is empty");
+  }
+
+  return tail_->val[tail_->last - 1];
+}
+
+std::string const & front() const 
+{
+if(empty()) {
+    throw std::runtime_error("list is empty");
+  }
+
+  return head_->val[head_->first];
+}
+
+std::string* getValAtLoc(size_t loc) const 
+{
+  if(empty()) {
+    return NULL;
+  }
+  else if(loc >= size_) {
+    return NULL;
+  }
+
+num_Over = size_ - loc;
+
+Item* curr = tail_;
+
+while(curr != NULL) {
+  curr_Size = curr->last - curr->first;
+  num_Over -= curr_Size;
+  if(num_Over == 0) {
+    return &curr->val[curr->last];
+  }
+  else if(num_Over < curr_size) {
+    
+  }
+}
+
+
+return NULL
 }
 
 
