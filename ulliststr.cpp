@@ -146,8 +146,11 @@ while(curr != NULL) {
   if(num_Over == 0) {
     return &curr->val[curr->last];
   }
-  else if(num_Over < curr_size) {
-    
+  else if (num_Over < 0) {
+    return &curr->val[curr->last + num_Over];
+  }
+  else {
+    curr = curr->next;
   }
 }
 
