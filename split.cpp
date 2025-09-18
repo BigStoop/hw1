@@ -17,7 +17,29 @@ the function below should be the only one in this file.
 void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
-// WRITE YOUR CODE HERE
+  // Base case, if "in" is empty exit
+  if (in == nullptr) {
+    return;
+  }
+
+  // Sets new node to current header
+  Node* curr = in;
+  // Moves to the next node in "in"  (for recursion)
+  in = in->next;
+
+  // Sorts curr node into either evens or odds
+  if (curr->value % 2 == 0) {
+    curr->next = evens; 
+    evens = curr;
+  }
+  else {
+    curr->next = odds;
+    odds = curr;
+  }
+
+  // Recursie step
+  split(in, odds, evens);
+
 }
 
 /* If you needed a helper function, write it here */
